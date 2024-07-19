@@ -18,12 +18,13 @@ const Day = ({
   const isSelected = selectedDate === fullDate;
   return (
     <>
-      <div
+      <button
         className={cn(
-          "hover:bg-gray-100 size-7 text-center relative rounded-md cursor-pointer flex items-center justify-center ",
+          "hover:bg-gray-100 size-12 divide-x divide-gray-200  text-center relative cursor-pointer flex items-center justify-center ",
           isHeader && "text to-black font-medium",
-          !isCurrentMonth && !isHeader && "text-gray-400  hover:bg-transparent",
+          !isCurrentMonth && !isHeader && "text-gray-400",
           isSelected && "bg-blue-500 text-white hover:bg-blue-500",
+          isToday && !isSelected && "text-blue-500"
         )}
         onClick={() => {
           updateDate(fullDate as string);
@@ -31,8 +32,8 @@ const Day = ({
         }}
       >
         {data}
-      <div className={cn(isToday && !isSelected && "absolute bottom-0  w-7 h-1 rounded-b-md bg-blue-500")}></div>
-      </div>
+      
+      </button>
     </>
   );
 };

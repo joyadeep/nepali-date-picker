@@ -33,11 +33,7 @@ const Calendar = ({ endDate,showingDate}: Props) => {
   const previousMonthEndDate = showingDate.month === 1 ? NepaliWeekData[showingDate.year - 1][11].endDate :
   NepaliWeekData[showingDate.year][showingDate.month - 2].endDate;
 
-  // TODO : if year changes it crashes. update logic for thismonthWeekStart and previousMonthEndDate
-// for week days [sunday to saturday]
-  for(let i=0; i <=6 ; i++){
-    monthArray.push({value : days[i],isHeader:true})
-  }
+
 // for previous month days
   for (let i=thisMonthWeekStart -1 ; i>=0; i--){
     monthArray.push({value : previousMonthEndDate - i,fullDate:formatDate({year:showingDate.year,month:showingDate.month-1,day:previousMonthEndDate - i})})
@@ -49,7 +45,7 @@ const Calendar = ({ endDate,showingDate}: Props) => {
   }
 
   
-  const nextMonthDaysCount = 49 - monthArray.length;
+  const nextMonthDaysCount = 42 - monthArray.length;
   for (let i=1; i<=nextMonthDaysCount; i++){
     monthArray.push({value : i,fullDate:formatDate({year:showingDate.year,month:showingDate.month+1,day:i})})
   }
@@ -62,8 +58,14 @@ const Calendar = ({ endDate,showingDate}: Props) => {
 
   return (
     <>
+
+        <div className='grid grid-cols-7 my-3'>
+          {days.map((value) => (
+            <div className='text-center text-gray-500' key={Math.random()}>{value}</div>
+          ))}
+        </div>
        
-        <div className='grid grid-cols-7 gap-4 place-items-center'>
+        <div className='grid grid-cols-7 place-items-center divide-x divide-y border [clip-path:inset(1px_0_0_1px)] *:border-l *:border-t *:border-gray-200 rounded-md'>
             {monthDateArray.map((value) => (
                 <Day value={value} key={Math.random()} />
             ))}
